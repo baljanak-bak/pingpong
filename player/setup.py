@@ -15,7 +15,7 @@ scripts = [
 
 setup(name='player',
       version='0.0.1',
-      url='https://github.com/baljanak/player',
+      url='https://github.com/baljanak-bak/pingpong',
       author='baljanak',
       install_requires=read_file('requirements.txt'),
       author_email='baljanak@gmail.com',

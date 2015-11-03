@@ -15,7 +15,7 @@ scripts = [
 
 setup(name='referee',
       version='0.0.1',
-      url='https://github.com/baljanak/referee',
+      url='https://github.com/baljanak-bak/pingpong',
       author='baljanak',
       install_requires=read_file('requirements.txt'),
       author_email='baljanak@gmail.com',
