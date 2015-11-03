@@ -65,6 +65,7 @@ def main():
     #TODO
     try:
       player_data['name'] = sys.argv[1]
+      player_data['defense_strength'] = sys.argv[2]
     except:
       pass
 
