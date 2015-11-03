@@ -24,7 +24,7 @@ def add_player_to_championship(request):
     championship_uuid = request.matchdict.get('championship_uuid')
     championship = Championship.fetch(uuid=championship_uuid)
 
-    if len(championship.players) >= 4:
+    if len(championship.players) >= 8:
         return json.dumps({'status': 404})
 
     player_name = request.params.get('player_name')
@@ -37,7 +37,7 @@ def add_player_to_championship(request):
     except Exception:
         pass
 
-    if len(championship.players) == 4:
+    if len(championship.players) == 8:
         log.info("All players have registered. Starting Championship .. ")
         ChampionshipGreenlet(championship).start()
 
