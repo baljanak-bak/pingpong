@@ -7,7 +7,6 @@ import pkg_resources
 from ConfigParser import SafeConfigParser
 
 from pyramid.config import Configurator
-import transaction
 
 from gevent import monkey
 monkey.patch_all()
@@ -21,15 +20,6 @@ from .routes import setup_routes
 
 def finish_callback(request):
     get_db_session().close()
-    """
-    if request.exception is not None:
-        get_db_session().rollback()
-        #transaction.abort()
-    else:
-        #transaction.commit()
-        get_db_session().commit()
-        log.info("Request handled")
-    """
 
 
 def new_request(event):
@@ -44,7 +34,6 @@ def setup_events(config):
 def seed_data():
     champ = Championship("Test Ping Pong Championship")
     champ.save()
-    #transaction.commit()
 
 
 def main():

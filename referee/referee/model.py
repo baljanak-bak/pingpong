@@ -6,7 +6,6 @@ import uuid
 import logging
 from collections import defaultdict
 
-import transaction
 from sqlalchemy import Column, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.types import Unicode, Integer, DateTime
@@ -61,9 +60,6 @@ class BaseTable(Base):
         session.add(self)
         session.flush()
         session.commit()
-
-    def commit(self):
-        transaction.commit()
 
 
 class Player(BaseTable):
