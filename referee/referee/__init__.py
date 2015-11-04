@@ -4,10 +4,8 @@ import os
 import shutil
 import sys
 import pkg_resources
-from ConfigParser import SafeConfigParser
 
 from pyramid.config import Configurator
-
 from gevent import monkey
 monkey.patch_all()
 from gevent import pywsgi
@@ -16,6 +14,7 @@ from .db import create_db, get_db_session
 from .model import Championship
 from .logger import log
 from .routes import setup_routes
+from .config import init_config
 
 
 def finish_callback(request):
@@ -23,8 +22,7 @@ def finish_callback(request):
 
 
 def new_request(event):
-    request = event.request
-    request.add_finished_callback(finish_callback)
+    event.request.add_finished_callback(finish_callback)
 
 
 def setup_events(config):
@@ -43,9 +41,9 @@ def main():
     setup_events(config)
     application = config.make_wsgi_app()
 
-    config = SafeConfigParser()
     ini_path = pkg_resources.resource_filename("referee", "referee.ini")
-    config.read(ini_path)
+    config = init_config(ini_path)
+
     host = config.get("server", "host")
     port = config.getint("server", "port")
 
